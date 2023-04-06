@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:my_travels/providers/greate_places.dart';
+import 'package:my_travels/providers/great_places.dart';
 import 'package:provider/provider.dart';
 
 import '../widgets/image_input.dart';
@@ -26,7 +26,7 @@ class _PlaceFormScreenState extends State<PlaceFormScreen> {
       return;
     }
 
-    Provider.of<GreatePlaces>(context, listen: false).addPlace(
+    Provider.of<GreatPlaces>(context, listen: false).addPlace(
       _titleController.text,
       _pickedImage,
     );

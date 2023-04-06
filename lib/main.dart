@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import './screens/place_form_screen.dart';
 import './utils/app_routes.dart';
 import './screens/places_list_screen.dart';
-import './providers/greate_places.dart';
+import 'providers/great_places.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => GreatePlaces()),
+        ChangeNotifierProvider(create: (_) => GreatPlaces()),
       ],
       child: MaterialApp(
         theme: ThemeData(
