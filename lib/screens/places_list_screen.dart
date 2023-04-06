@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:my_travels/utils/app_routes.dart';
+import 'package:provider/provider.dart';
+
+import '../providers/greate_places.dart';
+import '../utils/app_routes.dart';
 
 class PlacesListScreen extends StatefulWidget {
   const PlacesListScreen({super.key});
@@ -24,8 +27,22 @@ class _MyHomePageState extends State<PlacesListScreen> {
           ),
         ],
       ),
-      body: Center(
-        child: CircularProgressIndicator(),
+      body: Consumer<GreatePlaces>(
+        child: const Text('Got no places yet, start adding some'),
+        builder: (context, greatPlaces, child) => greatPlaces.itemsCount == 0
+            ? child!
+            : ListView.builder(
+                itemCount: greatPlaces.itemsCount,
+                itemBuilder: (context, index) => ListTile(
+                  leading: CircleAvatar(
+                    backgroundImage: FileImage(
+                      greatPlaces.itemByIndex(index).image,
+                    ),
+                  ),
+                  title: Text(greatPlaces.itemByIndex(index).title),
+                  onTap: () {},
+                ),
+              ),
       ),
     );
   }
