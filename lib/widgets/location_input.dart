@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
-import 'package:my_travels/screens/map_screen.dart';
-import 'package:my_travels/utils/location_util.dart';
+
+import '../screens/map_screen.dart';
+import '../utils/location_util.dart';
 
 class LocationInput extends StatefulWidget {
   const LocationInput({super.key});
@@ -38,6 +39,8 @@ class _LocationInputState extends State<LocationInput> {
     );
 
     if (selectedLocation == null) return;
+
+    print('[log] $selectedLocation');
   }
 
   Future<bool> _checkLocationPermissions() async {
