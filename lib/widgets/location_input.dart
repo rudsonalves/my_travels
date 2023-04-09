@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:location/location.dart';
+import 'package:my_travels/screens/map_screen.dart';
 import 'package:my_travels/utils/location_util.dart';
 
 class LocationInput extends StatefulWidget {
@@ -25,6 +27,17 @@ class _LocationInputState extends State<LocationInput> {
     setState(() {
       _previewImageUrl = staticMapImageUrl;
     });
+  }
+
+  Future<void> _selectOnMap() async {
+    final LatLng? selectedLocation = await Navigator.of(context).push(
+      MaterialPageRoute(
+        fullscreenDialog: true,
+        builder: (context) => const MapScreen(),
+      ),
+    );
+
+    if (selectedLocation == null) return;
   }
 
   Future<bool> _checkLocationPermissions() async {
@@ -81,7 +94,7 @@ class _LocationInputState extends State<LocationInput> {
             TextButton.icon(
               icon: const Icon(Icons.map),
               label: const Text('Select location'),
-              onPressed: () {},
+              onPressed: _selectOnMap,
             ),
           ],
         )
