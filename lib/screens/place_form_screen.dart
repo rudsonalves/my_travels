@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:my_travels/providers/great_places.dart';
 import 'package:my_travels/widgets/location_input.dart';
 import 'package:provider/provider.dart';
@@ -17,19 +18,27 @@ class PlaceFormScreen extends StatefulWidget {
 class _PlaceFormScreenState extends State<PlaceFormScreen> {
   final _titleController = TextEditingController();
   File? _pickedImage;
+  LatLng? _pickedPosition;
+
+  bool get _isValidForm => (_titleController.text.isNotEmpty &&
+      _pickedImage != null &&
+      _pickedPosition != null);
 
   void _selectImage(File pickedImage) {
-    _pickedImage = pickedImage;
+    setState(() => _pickedImage = pickedImage);
+  }
+
+  void _selectPosition(LatLng position) {
+    setState(() => _pickedPosition = position);
   }
 
   void _submitForm() {
-    if (_titleController.text.isEmpty || _pickedImage == null) {
-      return;
-    }
+    if (!_isValidForm) return;
 
     Provider.of<GreatPlaces>(context, listen: false).addPlace(
       _titleController.text,
-      _pickedImage,
+      _pickedImage!,
+      _pickedPosition!,
     );
 
     Navigator.of(context).pop();
@@ -60,14 +69,14 @@ class _PlaceFormScreenState extends State<PlaceFormScreen> {
                     const SizedBox(height: 10),
                     ImageInput(_selectImage),
                     const SizedBox(height: 10),
-                    const LocationInput(),
+                    LocationInput(_selectPosition),
                   ],
                 ),
               ),
             ),
           ),
           ElevatedButton.icon(
-            onPressed: _submitForm,
+            onPressed: _isValidForm ? _submitForm : null,
             icon: const Icon(Icons.add),
             label: const Text('Add'),
             style: ButtonStyle(
