@@ -14,4 +14,6 @@ Neste projeto são aplicados os pacotes:
  - sqflite: ^2.2.6
  - location: ^4.4.0
  - google_maps_flutter: ^2.2.5
+  - https://developers.google.com/maps/documentation/maps-static/overview
+  - https://developers.google.com/maps/documentation/geocoding
  - http: ^0.13.5
