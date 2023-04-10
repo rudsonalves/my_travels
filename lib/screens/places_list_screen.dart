@@ -48,6 +48,10 @@ class _MyHomePageState extends State<PlacesListScreen> {
                                 ),
                               ),
                               title: Text(greatPlaces.itemByIndex(index).title),
+                              subtitle: Text(greatPlaces
+                                  .itemByIndex(index)
+                                  .location!
+                                  .address!),
                               onTap: () {},
                             ),
                           ),

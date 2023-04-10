@@ -6,7 +6,9 @@ import '../screens/map_screen.dart';
 import '../utils/location_util.dart';
 
 class LocationInput extends StatefulWidget {
-  const LocationInput({super.key});
+  final Function onSelectPosition;
+
+  const LocationInput(this.onSelectPosition, {super.key});
 
   @override
   State<LocationInput> createState() => _LocationInputState();
@@ -15,19 +17,22 @@ class LocationInput extends StatefulWidget {
 class _LocationInputState extends State<LocationInput> {
   String? _previewImageUrl;
 
-  Future<void> _getCurrentUserLocation() async {
-    await _checkLocationPermissions();
-
-    final LocationData locData = await Location().getLocation();
-
+  void _showMapPreview(double latitude, double longitude) {
     final String staticMapImageUrl = LocationUtil.generateLocationPreviewImage(
-      latitude: locData.latitude!,
-      longitude: locData.longitude!,
+      latitude: latitude,
+      longitude: longitude,
     );
 
     setState(() {
       _previewImageUrl = staticMapImageUrl;
     });
+  }
+
+  Future<void> _getCurrentUserLocation() async {
+    await _checkLocationPermissions();
+    final LocationData locData = await Location().getLocation();
+    _showMapPreview(locData.latitude!, locData.longitude!);
+    widget.onSelectPosition(LatLng(locData.latitude!, locData.longitude!));
   }
 
   Future<void> _selectOnMap() async {
@@ -40,7 +45,8 @@ class _LocationInputState extends State<LocationInput> {
 
     if (selectedLocation == null) return;
 
-    print('[log] $selectedLocation');
+    _showMapPreview(selectedLocation.latitude, selectedLocation.longitude);
+    widget.onSelectPosition(selectedLocation);
   }
 
   Future<bool> _checkLocationPermissions() async {

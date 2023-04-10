@@ -1,3 +1,8 @@
+import 'dart:convert';
+
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:http/http.dart' as http;
+
 const googleApiKey = 'AIzaSyCdmbRTLo-BC051SMHhOtzd0RVFkPyECdk';
 
 class LocationUtil {
@@ -9,5 +14,18 @@ class LocationUtil {
         'center=$latitude,$longitude&zoom=13&size=600x300&maptype=roadmap'
         '&markers=color:blue%7Clabel:A%7C$latitude,$longitude'
         '&key=$googleApiKey';
+  }
+
+  static Future<String> getAdressFrom(LatLng position) async {
+    final url = Uri.https(
+      'maps.googleapis.com',
+      'maps/api/geocode/json',
+      {
+        'latlng': '${position.latitude},${position.longitude}',
+        'key': googleApiKey,
+      },
+    );
+    final response = await http.get(url);
+    return json.decode(response.body)['results'][0]['formatted_address'];
   }
 }
