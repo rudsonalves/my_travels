@@ -16,4 +16,5 @@ Neste projeto são aplicados os pacotes:
  - google_maps_flutter: ^2.2.5
   * https://developers.google.com/maps/documentation/maps-static/overview
   * https://developers.google.com/maps/documentation/geocoding
+  * https://developers.google.com/maps/documentation/geocoding/requests-reverse-geocoding
  - http: ^0.13.5
