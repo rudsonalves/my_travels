@@ -52,7 +52,12 @@ class _MyHomePageState extends State<PlacesListScreen> {
                                   .itemByIndex(index)
                                   .location!
                                   .address!),
-                              onTap: () {},
+                              onTap: () {
+                                Navigator.of(context).pushNamed(
+                                  AppRoutes.placeDetail,
+                                  arguments: greatPlaces.itemByIndex(index),
+                                );
+                              },
                             ),
                           ),
               ),
