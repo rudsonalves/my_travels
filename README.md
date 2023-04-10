@@ -1,16 +1,17 @@
-# my_travels
+# My Travel
 
-A new Flutter project.
+My Travel é um projeto em Flutter com o objetovo puramente acadêmico.
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+## Objetivos
 
-A few resources to get you started if this is your first Flutter project:
+Neste projeto são aplicados os pacotes:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+ - provider: ^6.0.5
+ - image_picker: ^0.8.7+1
+ - path_provider: ^2.0.14
+ - path: ^1.8.2
+ - sqflite: ^2.2.6
+ - location: ^4.4.0
+ - google_maps_flutter: ^2.2.5
+ - http: ^0.13.5
